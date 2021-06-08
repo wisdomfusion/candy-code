@@ -1,0 +1,30 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{template "title" .}} - Candy Code Box</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+<header>
+    <div id="logo">
+        <img src="/static/img/logo.svg">
+    </div>
+
+    <h1><a target="_self" href="/">CCB - Candy Code Box</a></h1>
+</header>
+
+<nav>
+    <a target="_self" href="/">Home</a>
+</nav>
+
+<main>
+    {{template "main" .}}
+</main>
+
+{{template "footer" .}}
+
+</html>
+{{end}}
