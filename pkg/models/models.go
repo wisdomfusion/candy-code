@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"errors"
 	"time"
 )
@@ -13,6 +14,5 @@ type Candy struct {
 	Candy string
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	ExpiredAt time.Time
-	DeletedAt time.Time
+	ExpiredAt sql.NullString
 }

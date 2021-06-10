@@ -34,6 +34,7 @@ func main() {
 	app := &application{
 		infoLog:  infoLog,
 		errorLog: errorLog,
+		candy: &controllers.CandyModel{DB: db},
 	}
 
 	srv := &http.Server{
