@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"flag"
+	"github.com/wisdomfusion/candy-code-box/pkg/controllers"
 	"log"
 	"net/http"
 	"os"
@@ -13,11 +14,12 @@ import (
 type application struct {
 	infoLog  *log.Logger
 	errorLog *log.Logger
+	candy *controllers.CandyModel
 }
 
 func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
-	dsn := flag.String("dsn", "web:pass@/candydb?parseTime=true", "MySQL Data Source Name")
+	dsn := flag.String("dsn", "root:a123456@tcp(127.0.0.1:3306)/candydb?parseTime=true", "MySQL Data Source Name")
 	flag.Parse()
 
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -41,7 +43,7 @@ func main() {
 	}
 
 	infoLog.Printf("Starting server on %s", *addr)
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	errorLog.Fatal(err)
 }
 
@@ -50,8 +52,10 @@ func openDB(dsn string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if err = db.Ping(); err != nil {
 		return nil, err
 	}
+
 	return db, nil
 }

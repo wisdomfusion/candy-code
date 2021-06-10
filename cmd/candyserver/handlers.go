@@ -53,6 +53,16 @@ func (app *application) storeCandy(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte("create a new snippet"))
+	title := "test"
+	candy := "test code"
+	expires := "7"
+
+	id, err := app.candy.Store(title, candy, expires)
+	if err != nil {
+		app.ServerError(w, err)
+		return
+	}
+
+	http.Redirect(w, r, fmt.Sprintf("/candy?id=%d", id), http.StatusSeeOther)
 }
 
